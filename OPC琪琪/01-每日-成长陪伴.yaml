@@ -1,0 +1,20 @@
+name: OPC琪琪-每日-成长陪伴
+enabled: true
+schedule:
+  kind: cron
+  expr: "30 18 * * *"
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 1800
+  message: |
+    琪琪成长陪伴任务（S01系列化 + 内置审核 + Humanizer 去AI化）
+    - 读取 S01 规划，生成故事（安徒生改编，5岁儿童适配）
+    - Humanizer 去AI化（删除AI高频词、夸张修饰、简化句式）
+    - 8维度内置审核（年龄适配/敏感内容/价值观/故事长度等）
+    - 保存故事+更新状态索引+飞书推送
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

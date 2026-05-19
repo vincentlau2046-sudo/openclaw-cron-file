@@ -1,0 +1,21 @@
+name: 股票-每日-热点速报
+enabled: true
+schedule:
+  kind: cron
+  expr: "30 21 * * 1-5"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 600
+  message: |
+    A股热点速报（每日21:00，周一到周五）
+    - 搜索大盘行情（沪深300、上证指数等）
+    - 搜索6大板块最新资讯（芯片/AI/具身智能/软件/能源/汽车）
+    - 写入 Obsidian 股票监控/每日速报/
+    - 同步飞书文档，folder_token: FxyxfDP5jlQJvSd3xkxcXke6nuq
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

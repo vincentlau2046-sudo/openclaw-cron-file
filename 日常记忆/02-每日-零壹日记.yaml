@@ -1,0 +1,19 @@
+name: 日常-每日-零壹日记
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 23 * * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  message: |
+    零壹日记本生成任务 v3.2
+    - 以零壹第一视角生成日终复盘
+    - 包含：智能复盘/行业洞察/成长复盘/知识图谱/睡前悄悄话
+    - 保存到 Obsidian + 同步飞书云盘（folder_token: ZmdKftJSwlpoLPdRZV5cEVDLnfc）
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

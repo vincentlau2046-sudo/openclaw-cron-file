@@ -1,0 +1,22 @@
+name: 日常-每日-晨间简报
+enabled: true
+schedule:
+  kind: cron
+  expr: "30 8 * * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 1800
+  lightContext: true
+  message: |
+    晨间智能简报
+    - 深圳天气+7天趋势+出行建议
+    - 每日金句+健康建议
+    - 今日任务预览+昨日回顾
+    - 同步飞书云盘（folder_token: ONymfvcjUlS3Iid0eAPcPhiSnUh）
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

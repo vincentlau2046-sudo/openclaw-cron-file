@@ -1,0 +1,22 @@
+name: OPC琪琪-每日-视频制作
+description: 每日 18:45 自动将琪琪成长故事转换为横版视频（1344×768）
+enabled: true
+schedule:
+  kind: cron
+  expr: "45 18 * * *"
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 1800
+  message: |
+    琪琪故事视频自动生成任务
+    - 读取已生成但未制作视频的故事
+    - 故事质量审核（字数/时长检查）
+    - 运行 qiqi-story-video 技能
+    - 输出横版视频 + 发布清单
+    - 写入发布队列
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

@@ -1,0 +1,17 @@
+name: 运维-每周-清理情报链接
+description: 每周日 02:00 清理 AI情报辅助数据中的旧记录
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 2 * * 0"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  message: |
+    清理 Obsidian AI情报/03-辅助数据/ 中的过期记录：
+    - read_urls.json: 超过14天
+    - read_links.json: 超过7天
+
+delivery:
+  mode: none

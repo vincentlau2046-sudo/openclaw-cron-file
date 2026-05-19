@@ -1,0 +1,21 @@
+name: 记忆-每周-学习复盘
+description: 每周日 19:00 生成学习循环复盘
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 19 * * 0"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 600
+  message: |
+    学习循环周复盘任务 v3（Obsidian 驱动）
+    - 读取本周 Obsidian 学习笔记/项目/决策/问题
+    - 核心洞察+知识关联+遗漏分析+活跃度
+    - 输出到 Obsidian 04-复盘/
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

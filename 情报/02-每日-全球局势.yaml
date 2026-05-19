@@ -1,0 +1,25 @@
+name: 情报-每日-全球局势
+description: 每日 05:45 全球局势情报，输出到 Obsidian + 飞书同步
+enabled: true
+schedule:
+  kind: cron
+  expr: "45 5 * * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 3600
+  message: |
+    # 全球局势每日情报任务 v3.0（Obsidian 主输出）
+    - 信息采集：过去24小时，政治/军事/经济/地缘四大维度
+    - 信源限定：新华社、央视新闻、路透社、AP、BBC、EIU、SIPRI、华尔街日报、金融时报
+    - 三级降级搜索策略
+    - 保存到 Obsidian（主输出）
+    - 路径: /home/Vincent/Documents/Obsidian vault/零壹日记本/01-工作/AI情报/01-每日情报/02-全球局势/YYYY-MM-DD.md
+    - 飞书同步：创建→写入→验证 block_count>1
+    - folder_token: FCHaf5uealM1BNdXmVTcLubZnrf
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

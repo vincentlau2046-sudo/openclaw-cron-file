@@ -1,0 +1,21 @@
+name: 记忆-每日-Obsidian同步
+description: 每天 23:30 检查 Ontology 新实体并同步到 Obsidian
+enabled: true
+schedule:
+  kind: cron
+  expr: "30 23 * * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 900
+  message: |
+    Ontology→Obsidian 每日同步任务 v2（分类路由）
+    - 按实体类型路由到正确 Obsidian 目录
+    - 使用 obsidian_tool.py 创建笔记
+    - 同步日志+报告
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

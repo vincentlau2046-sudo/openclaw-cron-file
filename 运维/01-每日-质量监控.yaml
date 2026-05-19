@@ -1,0 +1,21 @@
+name: 运维-每日-质量监控
+enabled: true
+schedule:
+  kind: cron
+  expr: "30 21 * * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 1800
+  message: |
+    系统质量监控日报
+    - 任务执行状态扫描+历史趋势分析
+    - 问题分类（严重/关注/正常）+根因分析
+    - 质量日报+PDCA改进记录
+    - 保存到 quality/quality_log.md
+
+delivery:
+  mode: none
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

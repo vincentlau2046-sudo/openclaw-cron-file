@@ -1,0 +1,22 @@
+name: 情报-每周-B站运营分析
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 10 * * 0"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 1800
+  message: |
+    # B站账号运营监控与分析报告
+    - 获取账号基础信息、已发布视频列表
+    - 分析播放量/点赞/投币/收藏/评论/分享
+    - 计算互动率、完播率估算、粉丝转化率、爆款率
+    - 生成运营建议（内容优化/发布策略/互动提升/增长策略）
+    - 保存报告并同步飞书
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

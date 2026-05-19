@@ -1,0 +1,33 @@
+name: 情报-每日-AI情报PPT视频
+enabled: true
+schedule:
+  kind: cron
+  expr: "30 6 * * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 1800
+  message: |
+    # 每日 AI 情报 PPT+视频 自动化任务（v3.0 Obsidian路径 + 人性化讲稿）
+
+    ## 核心流程
+    1. 读取 Obsidian AI 动态日报
+    2. pptx-master 生成 PPT（anthropic 模板，10-12页）
+    3. **撰写人性化口播讲稿**（基于完整日报+PPT结构，news_brief风格）
+       - 每页 60-150 字，纯文本，直接喂 edge-tts
+       - 人性化规范：开场像朋友聊天、过渡有悬念、加个人观点、有惊叹好奇
+    4. keynote-video generate.js 合成视频（Phase 3 技术合成）
+    5. 生成 B站发布元数据（publish_meta.json）
+    6. 飞书推送视频原件
+
+    ## 关键路径
+    - 输入: /home/Vincent/Documents/Obsidian vault/零壹日记本/01-工作/AI情报/01-每日情报/03-AI动态/YYYY-MM-DD.md
+    - 讲稿: video_project/scripts_rewritten/01_xxx.txt ~ NN_xxx.txt
+    - 配置: video_project/video_design_spec.json
+    - 输出: daily_ai_intel_YYYY-MM-DD.mp4
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

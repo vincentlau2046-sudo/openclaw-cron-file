@@ -1,0 +1,21 @@
+name: 股票-每日-持仓监控
+enabled: true
+schedule:
+  kind: cron
+  expr: "30 16 * * 1-5"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 600
+  message: |
+    A股持仓监控（每日盘后 16:30，周一到周五）
+    - 读取持仓配置，检查止损/预警/止盈/趋势线/单日大跌规则
+    - 大盘环境判断（沪深300）
+    - 如触发规则，生成5维度卖出审视报告
+    - 飞书推送告警
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

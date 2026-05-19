@@ -1,0 +1,23 @@
+name: 股票-每周-板块趋势
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 22 * * 5"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 600
+  message: |
+    A股板块周度分析（周五22:00）
+    - 大盘周度行情+北向资金
+    - 6大板块本周新闻+趋势判断
+    - 持仓验证（中科曙光、当升科技）
+    - 筛选候选股票+买入区间建议
+    - 更新 Obsidian 周度复盘/候选池/热点趋势
+    - 同步飞书文档
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

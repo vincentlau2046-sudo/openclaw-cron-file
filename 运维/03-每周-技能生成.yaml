@@ -1,0 +1,21 @@
+name: 记忆-每周-技能生成
+description: 每周六运行 pattern_detector → skill_generator → skill_publisher 链条
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 20 * * 6"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 900
+  message: |
+    技能自动生成任务
+    - 运行模式识别（pattern_detector）
+    - 生成技能建议（skill_generator）
+    - 保存到 Obsidian 08-技能/新技能建议/
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

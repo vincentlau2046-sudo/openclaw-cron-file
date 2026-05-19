@@ -1,0 +1,20 @@
+name: 股票-每日-候选股入场扫描
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 17 * * 1-5"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 600
+  message: |
+    候选股票入场扫描（每日盘后 17:00，周一到周五）
+    - 读取候选池，检查买入触发条件（6大板块+具身智能）
+    - 输出扫描报告，更新历史回溯表
+    - 如3/3条件满足，生成买入审视报告
+
+delivery:
+  mode: announce
+  channel: openclaw-weixin
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

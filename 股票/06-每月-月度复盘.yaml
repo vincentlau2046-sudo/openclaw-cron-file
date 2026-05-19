@@ -1,0 +1,22 @@
+name: 股票-每月-月度复盘
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 20 25-31 * 0"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 600
+  message: |
+    A股月度复盘（每月最后一个周日20:00）
+    - 回顾6大板块热点持续性
+    - 回溯候选股表现
+    - 验证持仓逻辑
+    - 下月配置建议
+    - 同步飞书文档
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

@@ -1,0 +1,20 @@
+name: 运维-双日-ClawHub监控
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 18 */2 * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  message: |
+    监控 ClawHub 账号 @VincentLau2046 的技能运营情况
+    - 检查已发布技能列表和状态
+    - 对比本地 skills 目录中的最新版本
+    - 识别需要更新的技能
+    - 生成运营报告
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

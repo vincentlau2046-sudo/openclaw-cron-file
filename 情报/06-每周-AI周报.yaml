@@ -1,0 +1,27 @@
+name: 情报-每周-AI周报
+description: 每周日 09:00 AI 周报，输出到 Obsidian + 飞书同步
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 9 * * 0"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 2400
+  model: bailian/MiniMax-M2.5
+  thinking: "off"
+  message: |
+    生成本周 AI 深度周报（公众号格式）
+    - 读取 Obsidian AI动态日报（03-AI动态/目录）
+    - 6个固定维度搜索补充（三级降级）
+    - 结构：核心摘要→本周动态→趋势洞察→机会雷达→附录
+    - 字数 2500-3000 字
+    - Obsidian 主输出: /home/Vincent/Documents/Obsidian vault/零壹日记本/01-工作/AI情报/02-每周情报/YYYY-Www-周报.md
+    - 飞书同步 + 推送摘要
+    - folder_token: GaBpfduPylc5mvd4ahUcnfwTnff
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

@@ -1,0 +1,26 @@
+name: 情报-每日-AI动态
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 6 * * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 3600
+  lightContext: true
+  model: bailian/qwen3.5-plus
+  message: |
+    生成今日 AI 全球情报日报（B站视频脚本级别质量）
+    - 增强去重机制（链接+语义，3天窗口）
+    - 6个固定维度：大模型/中国厂商/美国厂商/政策监管/投融资/技术突破
+    - 三级降级搜索策略
+    - B站视频脚本结构输出：钩子→核心动态→趋势洞察→互动引导
+    - 字数 1200-1500 字
+    - Obsidian 主输出: /home/Vincent/Documents/Obsidian vault/零壹日记本/01-工作/AI情报/01-每日情报/03-AI动态/YYYY-MM-DD.md
+    - 飞书同步 + 推送摘要
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

@@ -1,0 +1,20 @@
+name: OPC琪琪-每周-数据周报
+description: 每周日 10:00 自动分析琪琪OPC发布数据，生成周报
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 10 * * 0"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  message: |
+    琪琪OPC数据周报
+    - 统计本周视频数/审核通过率/发布成功率/选品挂载率
+    - 生成周报保存到 Obsidian 09-数据周报/
+    - 生成优化建议
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

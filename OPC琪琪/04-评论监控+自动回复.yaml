@@ -1,0 +1,21 @@
+name: OPC琪琪-评论监控+自动回复
+description: 每12小时监控抖音评论并自动回复（琪琪视角）
+enabled: true
+schedule:
+  kind: cron
+  expr: "0 1,13 * * *"
+  staggerMs: 300000
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  message: |
+    琪琪抖音评论监控+自动回复
+    - 浏览器打开抖音创作者中心，检查最近3个视频评论
+    - 安全审核（敏感词过滤）
+    - 以5岁小女孩琪琪的语气回复（简单、可爱、口语化，≤15字/句）
+    - 记录到 Obsidian 评论管理
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

@@ -1,0 +1,22 @@
+name: 情报-每日-B站视频发布
+enabled: true
+schedule:
+  kind: cron
+  expr: "30 7 * * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 1800
+  message: |
+    # AI 情报视频 → B站自动发布任务（v2.1）
+    - 读取 PPT+视频 Cron 生成的 publish_meta.json
+    - 验证视频文件存在
+    - 使用 bilibili-all-in-one 技能发布
+    - 回写发布状态到 publish_meta.json
+    - 飞书发送结果
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc

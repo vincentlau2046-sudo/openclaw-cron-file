@@ -1,0 +1,21 @@
+name: 记忆-每周-认知分析
+description: 每周日 20:00 执行风格分析、偏好学习、Persona 建议、技能优化
+enabled: true
+schedule:
+  kind: cron
+  expr: "10 20 * * *"
+  tz: Asia/Shanghai
+sessionTarget: isolated
+payload:
+  kind: agentTurn
+  timeoutSeconds: 600
+  message: |
+    认知层周度任务 v5（Obsidian 驱动 + 建议上报）
+    - 四维分析：风格分析/偏好学习/Persona建议/技能优化
+    - 输出到 Obsidian 04-复盘/
+    - 生成建议上报
+
+delivery:
+  mode: announce
+  channel: feishu
+  to: ou_01c7bc2227dc9960a4388a1db7e86ddc
