@@ -1,5 +1,5 @@
 name: OPC琪琪-每日-抖音发布
-description: 每日 19:45 自动发布琪琪故事视频到抖音
+description: 每日 19:45 自动发布琪琪故事视频到抖音（v3.0 稳定版）
 enabled: true
 schedule:
   kind: cron
@@ -7,33 +7,45 @@ schedule:
 sessionTarget: isolated
 payload:
   kind: agentTurn
+  timeoutSeconds: 2400
   message: |
-    琪琪故事抖音自动发布流程
+    琪琪故事抖音自动发布流程（v3.0 稳定版）
 
-    ## 第一步：选择发布对象
+    ## 核心改进
+    - 使用 evaluate 填写表单（绕过 contenteditable 和 ref 不稳定问题）
+    - 上传后循环 snapshot 等待（最多 120 秒）
+    - 失败自动重试 3 次
+    - 发布后立即清理 pending JSON
+
+    ## 第一步：读取发布队列
     - 读取状态索引，找到"视频✅发布❌"的最早期数
-    - 如全部已发布 → 飞书通知用户后退出
+    - 读取对应的 pending JSON 文件
+    - 如不存在 → 飞书通知后退出
 
-    ## 第二步：读取发布队列
-    - 检查 publish-queue/ 目录，找到对应期数的 pending JSON
-    - 读取视频路径、标题、描述、话题
+    ## 第二步：浏览器上传
+    - 复制视频到 /tmp/openclaw/uploads/
+    - navigate 到抖音上传页面
+    - upload 视频文件
+    - 循环 snapshot 等待上传完成（每 10 秒检查，最多 120 秒）
 
-    ## 第三步：浏览器登录 + 上传视频
-    - 导航到抖音创作者中心
-    - 上传视频，等待预审通过
+    ## 第三步：填写表单（evaluate 方式）
+    - evaluate 填写标题：document.querySelector('input[placeholder*=标题]')
+    - evaluate 填写描述：document.querySelector('[contenteditable="true"]')
+    - 等待 2 秒
 
-    ## 第四步：填写标题和描述 + 发布
-    - 填写标题、描述（含选品推荐文案）
-    - 勾选"公开"+"立即发布"
-    - 点击发布
+    ## 第四步：发布
+    - evaluate 点击发布按钮
+    - 循环 snapshot 等待发布成功（最多 60 秒）
 
     ## 第五步：记录与清理
-    - 创建发布日志到 07-发布记录/发布日志/
-    - 更新状态索引发布列为✅
-    - **立即删除 pending JSON 文件（防止重复发布）**
-    - 关闭浏览器
+    - 创建发布日志
+    - 更新状态索引
+    - **删除 pending JSON（防止重复）**
+    - 飞书通知结果
 
-    注意：商品以推荐文案形式加入描述，暂不操作原生商品挂载。
+    ## 失败处理
+    - 任一步骤失败 → 等待 30 秒重试（最多 3 次）
+    - 3 次全失败 → 通知用户，保留 pending JSON
 
 delivery:
   mode: announce
